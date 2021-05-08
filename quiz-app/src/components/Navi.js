@@ -1,13 +1,12 @@
+import {Link} from 'react-router-dom'
+
 const Navi = () => {
-    //------------------------------------------------------------
-    //!!!!!!!!!!!! CHANGE A HREFS TO LINK OF THE ROUTERS !!!!!!!!!
-    //------------------------------------------------------------
     return (
         <div>
-            <a href="/">Home</a>
-            <a href="/profile">Profile</a>
-            <a href="/quiz">Quiz</a>
-            <a href="/random">Random</a>
+            <Link to="/">Home</Link>
+            <Link to="/profile">Profile</Link>
+            <Link to="/quiz">Quiz</Link>
+            <Link to="/random">Random</Link>
         </div>
     )
 }

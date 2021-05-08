@@ -1,4 +1,5 @@
 import React from 'react'
+import {Link} from 'react-router-dom'
 
 const Scores = () => {
     const onClick = (e) => {
@@ -11,7 +12,7 @@ const Scores = () => {
             <p>B</p>
             <p>C</p>
             <p>D</p>
-            <a href="/quiz" onClick={onClick}>Start new quiz</a>
+            <Link to="/quiz" onClick={onClick}>Start new quiz</Link>
         </div>
     )
 }
