@@ -1,11 +1,12 @@
 import axios from 'axios'
 import React, {useState,useEffect} from 'react'
+import {Link} from 'react-router-dom'
 
 const api = axios.create({
     baseURL:'https://opentdb.com'
 })
 
-const Quiz = () => {
+const Quiz = (props) => {
     
     const [categories,setCategories] = useState([]);
 
@@ -18,9 +19,12 @@ const Quiz = () => {
 
     return (
         <div>
-            <div>{categories.map((category)=>(
-                <a href="#" key={category.id}>{category.name}</a>
-            ))}</div>
+            <ul>{categories.map((category)=>(<li key={category.id}>
+                <Link to={{
+                    pathname:'/question',
+                    categoryId:category.id
+                }}>{category.name}</Link></li>
+            ))}</ul>
         </div>
     )
 }

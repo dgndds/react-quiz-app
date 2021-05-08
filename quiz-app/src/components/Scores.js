@@ -1,14 +1,14 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
 
-const Scores = () => {
+const Scores = (props) => {
     const onClick = (e) => {
         console.log("Click");
     }
 
     return (
         <div>
-            <p>A</p>
+            <p>{props.userScore}</p>
             <p>B</p>
             <p>C</p>
             <p>D</p>

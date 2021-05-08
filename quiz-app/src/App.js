@@ -13,10 +13,10 @@ function App() {
     <Router>
       <div className="App">
         <Switch>
-          <Route path="/" exact component={Scores}/>
-          <Route path="/quiz"> <Quiz/></Route>
+          <Route path="/" exact><Scores userScore={userScore}></Scores></Route>
+          <Route path="/quiz" component={Quiz}/>
           <Route path="/random" component={RandomQuiz}/>
-          <Route path="/question" component={QuizQuestion}/>
+          <Route path="/question" component={QuizQuestion}><QuizQuestion setUserScore={setUserScore} userScore={userScore}/></Route>
         </Switch>
         <Navi/>
       </div>
@@ -30,4 +30,7 @@ export default App;
             <><Quiz/></>
           }
 
-          }/> */
+          }/> 
+          
+          <div>{userScore}</div>
+          */
