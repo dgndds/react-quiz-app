@@ -21,7 +21,7 @@ const Quiz = (props) => {
         <div>
             <ul>{categories.map((category)=>(<li key={category.id}>
                 <Link to={{
-                    pathname:'/question',
+                    pathname:'/quizsetup',
                     categoryId:category.id
                 }}>{category.name}</Link></li>
             ))}</ul>
