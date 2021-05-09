@@ -85,6 +85,13 @@ const QuizQuestion = (props) => {
         }
     }
 
+    function decodeHtml(html) {
+        let areaElement = document.createElement("textarea");
+        areaElement.innerHTML = html;
+    
+        return areaElement.value;
+    }
+
     return (
         <div className="text-center">
             {!apiFailed && (
@@ -98,7 +105,7 @@ const QuizQuestion = (props) => {
                         <div className="text-center" >
                         <div className="text-center">
                             <Card style={{padding:'2%'}}>
-                            <Card.Title>{questions[questionNumber].question}</Card.Title>
+                            <Card.Title>{decodeHtml(questions[questionNumber].question)}</Card.Title>
                             <Card.Body>
                             {
                             type === "multiple"  && (
@@ -117,11 +124,9 @@ const QuizQuestion = (props) => {
                             )}
                             </Card.Body>
                             </Card>
-    
-                            
                         </div>
                         
-                        <Button onClick={onClickNext} style={{marginTop:'2%'}}>Next</Button>
+                        <Button variant="danger" onClick={onClickNext} style={{marginTop:'2%'}}>Next</Button>
                         {answerResult.length > 0&& <Alert variant="light" style={{marginTop:'3%',width:'%5'}}>{answerResult}</Alert>}
                         </div>
                     )
@@ -144,7 +149,8 @@ const QuizQuestion = (props) => {
 
             {apiFailed && (
                 <>
-                <p>API FAILED</p>
+                <p style={{marginTop:'5%'}}>API FAILED</p>
+                <p>Failed To Retrieve Questions</p>
                 <Link to="/"><Button>GO BACK TO MAIN MENU</Button></Link>
                 </>
             )}
