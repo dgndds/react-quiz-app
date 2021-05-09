@@ -27,10 +27,12 @@ const QuizQuestion = (props) => {
         api.get('?amount=10&category='+ categoryId +'&difficulty='+ difficulty +'&type='+type+'').then(res => {
             console.log(res.data)
             console.log('?amount=10&category='+ categoryId +'&difficulty='+difficulty+'&type='+type)
-            let questions = res.data.results;
-            setQuestions(questions)
+            let questions1 = res.data.results;
+            setQuestions(questions1)
             
-            let list = questions[questionNumber].incorrect_answers.concat(questions[questionNumber].correct_answer);
+            console.log(questions1);
+            console.log(questionNumber);
+            let list = questions1[questionNumber].incorrect_answers.concat(questions1[questionNumber].correct_answer);
             list = list.sort(() => Math.random() - 0.5);
             setQuestionAnswers(list);
         })

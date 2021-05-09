@@ -1,7 +1,15 @@
 import {Link,useLocation} from 'react-router-dom';
-import React,{useState} from 'react'
+import React,{useState,useEffect} from 'react'
 
 const QuizSetup = () => {
+    
+    useEffect(() => {
+        setDifficultySelected(difficultySelected);
+        setTypeSelected(typeSelected);
+        setDifficulty(difficulty);
+        setType(type)
+       }, []);
+
     let location = useLocation();
     const categoryId = location.categoryId;
 
@@ -45,7 +53,11 @@ const QuizSetup = () => {
             <button onClick={onClickType} value="boolean">True-False</button>
             <button onClick={onClickType} value="multiple">Multiple Choice</button>
             
-            {difficultySelected && typeSelected && (<Link to={{
+            {difficultySelected && <p>Selected Difficulty: {difficulty.charAt(0).toUpperCase()+difficulty.slice(1)}</p>}
+            {typeSelected && <p>Selected type: {type === "multiple"?"Multiple Choice":"True-False"}</p>}
+
+            {difficultySelected && typeSelected && (
+            <Link to={{
                 pathname:'/question',
                 categoryId: categoryId,
                 type: type,
