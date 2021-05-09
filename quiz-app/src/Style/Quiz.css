@@ -1,0 +1,19 @@
+.list{
+    width: 55%;
+    margin-left: auto;
+    margin-right: auto;
+    
+}
+
+.list-item{
+    background-color: transparent;
+}
+
+.link-text{
+    text-decoration: none;
+    color:black;
+}
+
+.button{
+    width: 95%;
+}
