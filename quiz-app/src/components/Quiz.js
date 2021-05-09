@@ -15,7 +15,6 @@ const Quiz = (props) => {
 
     useEffect(()=>{
         api.get('/api_category.php').then(res => {
-            console.log(res.data)
             setCategories(res.data.trivia_categories)
         })
     }, [])

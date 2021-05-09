@@ -27,7 +27,6 @@ const QuizQuestion = (props) => {
     
 
     useEffect(()=>{
-
         setQuestions(questions);
         setQuestionNumber(questionNumber);
         setCorrectCount(correctAnswerCount);
@@ -38,13 +37,9 @@ const QuizQuestion = (props) => {
         setApiFailed(apiFailed);
 
         api.get('?amount=10&category='+ categoryId +'&difficulty='+ difficulty +'&type='+type+'').then(res => {
-            console.log(res.data)
-            console.log('?amount=10&category='+ categoryId +'&difficulty='+difficulty+'&type='+type)
             let returnedQuestions = res.data.results;
             setQuestions(returnedQuestions)
-            
-            console.log(returnedQuestions);
-            console.log(questionNumber);
+
             let list = returnedQuestions[questionNumber].incorrect_answers.concat(returnedQuestions[questionNumber].correct_answer);
             list = list.sort(() => Math.random() - 0.5);
             setQuestionAnswers(list);

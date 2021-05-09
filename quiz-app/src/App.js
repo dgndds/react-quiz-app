@@ -27,12 +27,3 @@ function App() {
 }
 
 export default App;
-
-/**<Route path="/quiz" render={()=>{
-            <><Quiz/></>
-          }
-
-          }/> 
-          
-          <div>{userScore}</div>
-          */

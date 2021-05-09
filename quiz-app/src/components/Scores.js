@@ -10,10 +10,6 @@ import '../Style/Scores.css'
 const Scores = (props) => {
     const [friendNames] = useState(["Tom","Jack","Lora","Lucas","James","Sheva","Ali","Ayşe","Alva","Jerrie","Bud","Ariel","Hardy","Katie","Kristopher","Rickey"]);
 
-    const onClick = (e) => {
-        console.log("Click");
-    }
-
     return (
         <div className="text-center">
             <Alert variant="dark" className="justify-content-center text-center alert"><strong>Welcome Back,{friendNames[Math.floor(Math.random() * friendNames.length)]}!</strong></Alert>
@@ -46,7 +42,7 @@ const Scores = (props) => {
                 </Card>
                 </ListGroup.Item>
             </ListGroup> 
-            <Button variant="danger" className="button"><Link className="link-text" to="/quiz" onClick={onClick}>Start new quiz</Link></Button> 
+            <Button variant="danger" className="button"><Link className="link-text" to="/quiz">Start new quiz</Link></Button> 
         </div>
     )
 }
