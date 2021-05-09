@@ -1,6 +1,8 @@
 import axios from 'axios'
 import React, {useState,useEffect} from 'react'
 import {Link,useLocation} from 'react-router-dom'
+import 'bootstrap/dist/css/bootstrap.min.css'
+import {ButtonGroup,Button,Card,Alert} from 'react-bootstrap'
 
 const api = axios.create({
     baseURL:'https://opentdb.com/api.php'
@@ -77,40 +79,42 @@ const QuizQuestion = (props) => {
     }
 
     return (
-        <div>
+        <div className="text-center">
             {questionNumber < 10 && (<p>{questionNumber + 1}/10</p>)}
             {
-                /*questions.map((question,index)=>(
-                    <div key={index}>
-                        <p>{question.question}</p>
-                        <button>{question.correct_answer}</button>
-                        <button>{question.incorrect_answers[0]}</button>
-                        <button>{question.incorrect_answers[1]}</button>
-                        <button>{question.incorrect_answers[2]}</button>
+                
+                questions.length > 0 && questionNumber < 10 && 
+                (
+                    <div className="text-center" >
+                    <div className="text-center">
+                        <Card style={{padding:'2%'}}>
+                        <Card.Title>{questions[questionNumber].question}</Card.Title>
+                        <Card.Body>
+                        {
+                        type === "multiple"  && (
+                        <ButtonGroup vertical>
+                            <Button onClick={onClickAnswer} value={questionAnswers[0]} disabled={disabled}>{questionAnswers[0]}</Button>
+                            <Button onClick={onClickAnswer} value={questionAnswers[1]} disabled={disabled}>{questionAnswers[1]}</Button>
+                            <Button onClick={onClickAnswer} value={questionAnswers[2]} disabled={disabled}>{questionAnswers[2]}</Button>
+                            <Button onClick={onClickAnswer} value={questionAnswers[3]} disabled={disabled}>{questionAnswers[3]}</Button>
+                        </ButtonGroup>)}
+
+                        {type === "boolean" && (
+                        <ButtonGroup>
+                            <Button onClick={onClickAnswer} value={"True"} disabled={disabled}>True</Button>
+                            <Button onClick={onClickAnswer} value={"False"} disabled={disabled}>False</Button>
+                        </ButtonGroup>
+                        )}
+                        </Card.Body>
+                        </Card>
+
+                        
                     </div>
-                ))*/
-                
-                questions.length > 0 && questionNumber < 10 && (
-                
-                <div>
-                <p>{questions[questionNumber].question}</p>
-
-                {
                     
-                type === "multiple"  && (<><button onClick={onClickAnswer} value={questionAnswers[0]} disabled={disabled}>{questionAnswers[0]}</button>
-                    <button onClick={onClickAnswer} value={questionAnswers[1]} disabled={disabled}>{questionAnswers[1]}</button>
-                    <button onClick={onClickAnswer} value={questionAnswers[2]} disabled={disabled}>{questionAnswers[2]}</button>
-                    <button onClick={onClickAnswer} value={questionAnswers[3]} disabled={disabled}>{questionAnswers[3]}</button></>)}
-
-                {type === "boolean" && (
-                <>
-                    <button onClick={onClickAnswer} value={"True"} disabled={disabled}>True</button>
-                    <button onClick={onClickAnswer} value={"False"} disabled={disabled}>False</button>
-                </>
-                )}
-                <button onClick={onClickNext}>Next Question</button>
-                <p>{answerResult}</p>
-                 </div>)
+                    <Button onClick={onClickNext} style={{marginTop:'2%'}}>Next</Button>
+                    <Alert variant="light" style={{marginTop:'3%',width:'%5'}}>{answerResult}</Alert>
+                    </div>
+                )
             }
 
             {
