@@ -110,10 +110,10 @@ const QuizQuestion = (props) => {
                             {
                             type === "multiple"  && (
                             <ButtonGroup vertical>
-                                <Button onClick={onClickAnswer} value={questionAnswers[0]} disabled={disabled}>{questionAnswers[0]}</Button>
-                                <Button onClick={onClickAnswer} value={questionAnswers[1]} disabled={disabled}>{questionAnswers[1]}</Button>
-                                <Button onClick={onClickAnswer} value={questionAnswers[2]} disabled={disabled}>{questionAnswers[2]}</Button>
-                                <Button onClick={onClickAnswer} value={questionAnswers[3]} disabled={disabled}>{questionAnswers[3]}</Button>
+                                <Button onClick={onClickAnswer} value={questionAnswers[0]} disabled={disabled}>{decodeHtml(questionAnswers[0])}</Button>
+                                <Button onClick={onClickAnswer} value={questionAnswers[1]} disabled={disabled}>{decodeHtml(questionAnswers[1])}</Button>
+                                <Button onClick={onClickAnswer} value={questionAnswers[2]} disabled={disabled}>{decodeHtml(questionAnswers[2])}</Button>
+                                <Button onClick={onClickAnswer} value={questionAnswers[3]} disabled={disabled}>{decodeHtml(questionAnswers[3])}</Button>
                             </ButtonGroup>)}
     
                             {type === "boolean" && (
@@ -159,15 +159,3 @@ const QuizQuestion = (props) => {
 }
 
 export default QuizQuestion
-
-/**
- * <button onClick={onClickAnswer} value={questions[questionNumber].correct_answer} disabled={disabled}>{questions[questionNumber].correct_answer}</button>
-                    <button onClick={onClickAnswer} value={questions[questionNumber].incorrect_answers[0]} disabled={disabled}>{questions[questionNumber].incorrect_answers[0]}</button>
-                    <button onClick={onClickAnswer} value={questions[questionNumber].incorrect_answers[1]} disabled={disabled}>{questions[questionNumber].incorrect_answers[1]}</button>
-                    <button onClick={onClickAnswer} value={questions[questionNumber].incorrect_answers[2]} disabled={disabled}>{questions[questionNumber].incorrect_answers[2]}</button>
-
-                    <button onClick={onClickAnswer} value={questionAnswers[0]} disabled={disabled}>{questionAnswers[0]}</button>
-                    <button onClick={onClickAnswer} value={questionAnswers[1]} disabled={disabled}>{questionAnswers[1]}</button>
-                    <button onClick={onClickAnswer} value={questionAnswers[2]} disabled={disabled}>{questionAnswers[2]}</button>
-                    <button onClick={onClickAnswer} value={questionAnswers[3]} disabled={disabled}>{questionAnswers[3]}</button>
- */
