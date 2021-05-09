@@ -27,7 +27,8 @@ const Quiz = (props) => {
             {categories.map((category)=>(<ListGroup.Item className="text-center list-item" key={category.id}>
                 <Link className="link-text" to={{
                     pathname:'/quizsetup',
-                    categoryId:category.id
+                    categoryId:category.id,
+                    categoryName:category.name
                 }}><Button variant="danger" className="button">{category.name}</Button></Link>
                 </ListGroup.Item>
             ))}

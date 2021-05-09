@@ -15,6 +15,7 @@ const QuizSetup = () => {
 
     let location = useLocation();
     const categoryId = location.categoryId;
+    const categoryName = location.categoryName;
 
     const [difficultySelected,setDifficultySelected] = useState(false);
     const [typeSelected,setTypeSelected] = useState(false);
@@ -69,6 +70,7 @@ const QuizSetup = () => {
             <Link to={{
                 pathname:'/question',
                 categoryId: categoryId,
+                categoryName:categoryName,
                 type: type,
                 difficulty: difficulty
             }}><Button variant="danger">Start Quiz</Button></Link>)}

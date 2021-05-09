@@ -16,12 +16,15 @@ const QuizQuestion = (props) => {
     const [answerResult, setAnswerResult] = useState("");
     const [disabled, setDisabled] = useState(false);
     const [questionAnswers,setQuestionAnswers] = useState([]);
+    const [apiFailed,setApiFailed] = useState(false);
 
     let location = useLocation();
     const categoryId = location.categoryId;
     const type = location.type;
+    const categoryName = location.categoryName
     const difficulty = location.difficulty
     const userScore = props.userScore
+    
 
     useEffect(()=>{
 
@@ -32,18 +35,22 @@ const QuizQuestion = (props) => {
         setAnswerResult(answerResult);
         setDisabled(disabled);
         setQuestionAnswers(questionAnswers);
+        setApiFailed(apiFailed);
 
         api.get('?amount=10&category='+ categoryId +'&difficulty='+ difficulty +'&type='+type+'').then(res => {
             console.log(res.data)
             console.log('?amount=10&category='+ categoryId +'&difficulty='+difficulty+'&type='+type)
-            let questions1 = res.data.results;
-            setQuestions(questions1)
+            let returnedQuestions = res.data.results;
+            setQuestions(returnedQuestions)
             
-            console.log(questions1);
+            console.log(returnedQuestions);
             console.log(questionNumber);
-            let list = questions1[questionNumber].incorrect_answers.concat(questions1[questionNumber].correct_answer);
+            let list = returnedQuestions[questionNumber].incorrect_answers.concat(returnedQuestions[questionNumber].correct_answer);
             list = list.sort(() => Math.random() - 0.5);
             setQuestionAnswers(list);
+        }).catch((error)=>{
+            console.log(error);
+            setApiFailed(true);
         })
         
     }, [])
@@ -80,52 +87,67 @@ const QuizQuestion = (props) => {
 
     return (
         <div className="text-center">
-            {questionNumber < 10 && (<p>{questionNumber + 1}/10</p>)}
-            {
-                
-                questions.length > 0 && questionNumber < 10 && 
-                (
-                    <div className="text-center" >
-                    <div className="text-center">
-                        <Card style={{padding:'2%'}}>
-                        <Card.Title>{questions[questionNumber].question}</Card.Title>
-                        <Card.Body>
-                        {
-                        type === "multiple"  && (
-                        <ButtonGroup vertical>
-                            <Button onClick={onClickAnswer} value={questionAnswers[0]} disabled={disabled}>{questionAnswers[0]}</Button>
-                            <Button onClick={onClickAnswer} value={questionAnswers[1]} disabled={disabled}>{questionAnswers[1]}</Button>
-                            <Button onClick={onClickAnswer} value={questionAnswers[2]} disabled={disabled}>{questionAnswers[2]}</Button>
-                            <Button onClick={onClickAnswer} value={questionAnswers[3]} disabled={disabled}>{questionAnswers[3]}</Button>
-                        </ButtonGroup>)}
-
-                        {type === "boolean" && (
-                        <ButtonGroup>
-                            <Button onClick={onClickAnswer} value={"True"} disabled={disabled}>True</Button>
-                            <Button onClick={onClickAnswer} value={"False"} disabled={disabled}>False</Button>
-                        </ButtonGroup>
-                        )}
-                        </Card.Body>
-                        </Card>
-
-                        
-                    </div>
+            {!apiFailed && (
+                <>
+                <Alert variant="light">{categoryName}</Alert>
+                {questionNumber < 10 && (<p>{questionNumber + 1}/10</p>)}
+                {
                     
-                    <Button onClick={onClickNext} style={{marginTop:'2%'}}>Next</Button>
-                    <Alert variant="light" style={{marginTop:'3%',width:'%5'}}>{answerResult}</Alert>
-                    </div>
-                )
-            }
+                    questions.length > 0 && questionNumber < 10 && 
+                    (
+                        <div className="text-center" >
+                        <div className="text-center">
+                            <Card style={{padding:'2%'}}>
+                            <Card.Title>{questions[questionNumber].question}</Card.Title>
+                            <Card.Body>
+                            {
+                            type === "multiple"  && (
+                            <ButtonGroup vertical>
+                                <Button onClick={onClickAnswer} value={questionAnswers[0]} disabled={disabled}>{questionAnswers[0]}</Button>
+                                <Button onClick={onClickAnswer} value={questionAnswers[1]} disabled={disabled}>{questionAnswers[1]}</Button>
+                                <Button onClick={onClickAnswer} value={questionAnswers[2]} disabled={disabled}>{questionAnswers[2]}</Button>
+                                <Button onClick={onClickAnswer} value={questionAnswers[3]} disabled={disabled}>{questionAnswers[3]}</Button>
+                            </ButtonGroup>)}
+    
+                            {type === "boolean" && (
+                            <ButtonGroup>
+                                <Button onClick={onClickAnswer} value={"True"} disabled={disabled}>True</Button>
+                                <Button onClick={onClickAnswer} value={"False"} disabled={disabled}>False</Button>
+                            </ButtonGroup>
+                            )}
+                            </Card.Body>
+                            </Card>
+    
+                            
+                        </div>
+                        
+                        <Button onClick={onClickNext} style={{marginTop:'2%'}}>Next</Button>
+                        {answerResult.length > 0&& <Alert variant="light" style={{marginTop:'3%',width:'%5'}}>{answerResult}</Alert>}
+                        </div>
+                    )
+                }
+    
+                {
+                    questionNumber >= 10 && (
+                        <Card>
+                            <Card.Title>Results</Card.Title>
+                            <Card.Body>
+                            <p>Correct Answers:{correctAnswerCount}</p>
+                            <p>Wrong Answers:{wrongAnswerCount}</p>
+                            <Link to="/"><Button variant="danger">Go to Main Menu</Button></Link>
+                            </Card.Body>
+                        </Card>
+                    )
+                }
+                </>
+            )}
 
-            {
-                questionNumber >= 10 && (
-                    <div>
-                        <p>Correct Answers:{correctAnswerCount}</p>
-                        <p>Wrong Answers:{wrongAnswerCount}</p>
-                        <Link to="/">Go to Main Menu</Link>
-                    </div>
-                )
-            }
+            {apiFailed && (
+                <>
+                <p>API FAILED</p>
+                <Link to="/"><Button>GO BACK TO MAIN MENU</Button></Link>
+                </>
+            )}
         </div>
     )
 }
