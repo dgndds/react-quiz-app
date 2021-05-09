@@ -1,5 +1,8 @@
 import {Link,useLocation} from 'react-router-dom';
 import React,{useState,useEffect} from 'react'
+import 'bootstrap/dist/css/bootstrap.min.css'
+import {ButtonGroup,Button,Alert} from 'react-bootstrap'
+import '../Style/QuizSetup.css'
 
 const QuizSetup = () => {
     
@@ -41,20 +44,26 @@ const QuizSetup = () => {
     }
 
     return (
-        <div>
-            <p>Difficulty</p>
-            <button onClick={onClickAny}>Any</button>
-            <button onClick={onClickDifficulty} value="easy">Easy</button>
-            <button onClick={onClickDifficulty} value="medium">Medium</button>
-            <button onClick={onClickDifficulty} value="hard">Hard</button>
+        <div className="text-center">
+            <Alert variant="dark"><strong>Setup Quiz</strong></Alert>
+            <p className="title">Difficulty</p>
+            <ButtonGroup vertical className="button">
+                <Button variant="danger" onClick={onClickAny}>Any</Button>
+                <Button variant="danger" onClick={onClickDifficulty} value="easy">Easy</Button>
+                <Button variant="danger" onClick={onClickDifficulty} value="medium">Medium</Button>
+                <Button variant="danger" onClick={onClickDifficulty} value="hard">Hard</Button>
+            </ButtonGroup>
             
-            <p>Type</p>
-            <button onClick={onClickAnyType}>Any</button>
-            <button onClick={onClickType} value="boolean">True-False</button>
-            <button onClick={onClickType} value="multiple">Multiple Choice</button>
             
-            {difficultySelected && <p>Selected Difficulty: {difficulty.charAt(0).toUpperCase()+difficulty.slice(1)}</p>}
-            {typeSelected && <p>Selected type: {type === "multiple"?"Multiple Choice":"True-False"}</p>}
+            <p className="title">Type</p>
+            <ButtonGroup vertical  className="button">
+                <Button variant="danger" onClick={onClickAnyType}>Any</Button>
+                <Button variant="danger" onClick={onClickType} value="boolean">True-False</Button>
+                <Button variant="danger" onClick={onClickType} value="multiple">Multiple Choice</Button>
+            </ButtonGroup>  
+            
+            {difficultySelected && <p className="info">Selected Difficulty: {difficulty.charAt(0).toUpperCase()+difficulty.slice(1)}</p>}
+            {typeSelected && <p className="info">Selected type: {type === "multiple"?"Multiple Choice":"True-False"}</p>}
 
             {difficultySelected && typeSelected && (
             <Link to={{
@@ -62,8 +71,7 @@ const QuizSetup = () => {
                 categoryId: categoryId,
                 type: type,
                 difficulty: difficulty
-            }}>Start Quiz</Link>)}
-            
+            }}><Button variant="danger">Start Quiz</Button></Link>)}
         </div>
     )
 }

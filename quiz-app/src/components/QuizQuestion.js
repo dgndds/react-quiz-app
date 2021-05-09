@@ -23,7 +23,14 @@ const QuizQuestion = (props) => {
 
     useEffect(()=>{
 
-        console.log(userScore)
+        setQuestions(questions);
+        setQuestionNumber(questionNumber);
+        setCorrectCount(correctAnswerCount);
+        setWrongCount(wrongAnswerCount);
+        setAnswerResult(answerResult);
+        setDisabled(disabled);
+        setQuestionAnswers(questionAnswers);
+
         api.get('?amount=10&category='+ categoryId +'&difficulty='+ difficulty +'&type='+type+'').then(res => {
             console.log(res.data)
             console.log('?amount=10&category='+ categoryId +'&difficulty='+difficulty+'&type='+type)
