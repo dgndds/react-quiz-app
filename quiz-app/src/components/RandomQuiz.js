@@ -47,9 +47,9 @@ const RandomQuiz = () => {
                 <Row>
                     <Card style={{width:'50%',marginLeft:'auto',marginRight:'auto'}}>
                         <Card.Body>
-                            <p>Category:{loaded&&categories[categoryId - 9].name}</p>
-                            <p>Difficulty: {difficulty}</p>
-                            <p>Type: {type}</p>
+                            <p>Category: {loaded&&categories[categoryId - 9].name}</p>
+                            <p>Difficulty: {difficulty.charAt(0).toUpperCase()+difficulty.slice(1)}</p>
+                            <p>Type: {type === "multiple"?"Multiple Choice":"True-False"}</p>
                             <Button variant="danger" onClick={onClickReroll}>Reroll</Button>
                         </Card.Body>
                     </Card>

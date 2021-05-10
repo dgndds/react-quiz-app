@@ -144,7 +144,7 @@ const QuizQuestion = (props) => {
 
             {apiFailed && (
                 <>
-                <p style={{marginTop:'5%'}}>API FAILED</p>
+                <p style={{marginTop:'5%'}}>Request Failed</p>
                 <p>Failed To Retrieve Questions</p>
                 <Link to="/"><Button>GO BACK TO MAIN MENU</Button></Link>
                 </>
